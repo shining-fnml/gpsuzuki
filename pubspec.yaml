@@ -1,0 +1,6 @@
+name: angle_converter_app
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
