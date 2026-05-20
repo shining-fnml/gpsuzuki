@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convertitore di coordinate GPS - DD, DDM, DMS">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%232196F3' width='192' height='192'/><text x='50%' y='50%' font-size='100' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle'>📍</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%232196F3' width='180' height='180'/><text x='50%' y='50%' font-size='90' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle'>📍</text></svg>">
+    <title>GPS Suzuki - Convertitore Coordinate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📍 GPS Suzuki</h1>
+                <p class="subtitle">Convertitore di Coordinate GPS</p>
+            </div>
+            <div class="status-indicator">
+                <span id="onlineStatus" class="status-badge online">● Online</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="section">
+                <h2>Inserisci Coordinate</h2>
+                <div class="input-grid">
+                    <!-- DD Input -->
+                    <div class="input-group">
+                        <label for="ddLat">DD - Latitudine</label>
+                        <input type="text" id="ddLat" placeholder="45.4642" class="input-field">
+                        <small>Formato: 45.4642</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ddLon">DD - Longitudine</label>
+                        <input type="text" id="ddLon" placeholder="9.1900" class="input-field">
+                        <small>Formato: 9.1900</small>
+                    </div>
+
+                    <!-- DDM Input -->
+                    <div class="input-group">
+                        <label for="ddmLat">DDM - Latitudine</label>
+                        <input type="text" id="ddmLat" placeholder="45 27.852" class="input-field">
+                        <small>Formato: 45 27.852</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ddmLon">DDM - Longitudine</label>
+                        <input type="text" id="ddmLon" placeholder="9 11.4" class="input-field">
+                        <small>Formato: 9 11.4</small>
+                    </div>
+
+                    <!-- DMS Input -->
+                    <div class="input-group">
+                        <label for="dmsLat">DMS - Latitudine</label>
+                        <input type="text" id="dmsLat" placeholder="45 27 51.1" class="input-field">
+                        <small>Formato: 45 27 51.1</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="dmsLon">DMS - Longitudine</label>
+                        <input type="text" id="dmsLon" placeholder="9 11 24" class="input-field">
+                        <small>Formato: 9 11 24</small>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="button-group">
+                    <button id="convertBtn" class="btn btn-primary">🔄 Converti</button>
+                    <button id="clearBtn" class="btn btn-secondary">🗑️ Pulisci</button>
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="section">
+                <h2>Risultati</h2>
+                <div class="output-grid">
+                    <div class="output-card">
+                        <h3>DD (Decimali)</h3>
+                        <div class="output-value">
+                            <div class="coord-pair">
+                                <span class="label">Lat:</span>
+                                <span id="outDDLat" class="value">-</span>
+                                <button class="copy-btn" data-target="outDDLat">📋</button>
+                            </div>
+                            <div class="coord-pair">
+                                <span class="label">Lon:</span>
+                                <span id="outDDLon" class="value">-</span>
+                                <button class="copy-btn" data-target="outDDLon">📋</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="output-card">
+                        <h3>DDM (Gradi Decimali Minuti)</h3>
+                        <div class="output-value">
+                            <div class="coord-pair">
+                                <span class="label">Lat:</span>
+                                <span id="outDDMLat" class="value">-</span>
+                                <button class="copy-btn" data-target="outDDMLat">📋</button>
+                            </div>
+                            <div class="coord-pair">
+                                <span class="label">Lon:</span>
+                                <span id="outDDMLon" class="value">-</span>
+                                <button class="copy-btn" data-target="outDDMLon">📋</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="output-card">
+                        <h3>DMS (Gradi Minuti Secondi)</h3>
+                        <div class="output-value">
+                            <div class="coord-pair">
+                                <span class="label">Lat:</span>
+                                <span id="outDMSLat" class="value">-</span>
+                                <button class="copy-btn" data-target="outDMSLat">📋</button>
+                            </div>
+                            <div class="coord-pair">
+                                <span class="label">Lon:</span>
+                                <span id="outDMSLon" class="value">-</span>
+                                <button class="copy-btn" data-target="outDMSLon">📋</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="section info-section">
+                <h2>ℹ️ Informazioni</h2>
+                <div class="info-content">
+                    <div class="info-item">
+                        <h3>Formati Supportati</h3>
+                        <ul>
+                            <li><strong>DD:</strong> Decimal Degrees - 45.4642</li>
+                            <li><strong>DDM:</strong> Degrees Decimal Minutes - 45 27.852</li>
+                            <li><strong>DMS:</strong> Degrees Minutes Seconds - 45 27 51.1</li>
+                        </ul>
+                    </div>
+                    <div class="info-item">
+                        <h3>Note Importanti</h3>
+                        <ul>
+                            <li>Latitudine: da -90° a +90° (Sud/Nord)</li>
+                            <li>Longitudine: da -180° a +180° (Ovest/Est)</li>
+                            <li>Supporta input con separatori: spazio, virgola, punto</li>
+                            <li>Funziona completamente offline 📡</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Message -->
+            <div id="errorMsg" class="error-message" style="display: none;"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>GPS Suzuki v1.0 • <a href="https://github.com/shining-fnml/gpsuzuki" target="_blank">GitHub</a> • Offline-First PWA</p>
+        </footer>
+    </div>
+
+    <script src="converter.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('✅ Service Worker registered'))
+                .catch(err => console.log('❌ Service Worker registration failed:', err));
+        }
+    </script>
+</body>
+</html>
